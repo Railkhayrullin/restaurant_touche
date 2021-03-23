@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/Railkhayrullin" target="_blank" rel="noopener noreferrer">
-        <img width="100" src="logo.png" title="Rail_Khayrulllin">
+        <img width="130" src="logo.png" title="Rail_Khayrulllin">
     </a>
 </p>
 
