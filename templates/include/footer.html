@@ -1,0 +1,30 @@
+{% load my_tags %}
+
+<div id="footer">
+  <div class="container text-center">
+    <div class="col-md-4">
+      {% get_contact_info as info %}
+      <h3>Адрес</h3>
+      <div class="contact-item">
+        <p>{{ info.city_postcode }}</p>
+        <p>{{ info.street_building }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>Мы открыты</h3>
+      <div class="contact-item">
+        <p>Пн-Чт: {{ info.from_hour_mon_thurs }} - {{ info.to_hour_mon_thurs }}</p>
+        <p>Пт-Вс: {{ info.from_hour_fri_sun }} - {{ info.to_hour_fri_sun }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>Контактные данные</h3>
+      <div class="contact-item">
+        <p>Телефон: {{ info.contact_phone }}</p>
+        <p>Email: {{ info.email }}</p>
+          <br>
+          <br>
+      </div>
+    </div>
+  </div>
+</div>

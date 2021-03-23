@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ chefs.name }}{% endblock title %}
+
+{% block content %}
+    <div id="chef">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>{{ chefs.name }}</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="chef-img" align="right">
+                        <img src="{{ chefs.image.url }}" alt="" width="400" height="600">
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="chef-text">
+                        <h4 align="center">Описание</h4>
+                        <p>{{ chefs.description }}</p>
+                        <h5>Возраст: {{ chefs.age }}</h5>
+                        <h4 class="page-header text-center">Применяемые кухни</h4>
+                        {% for item in chefs.kitchen.all %}
+                            <div class="col-md-4 team">
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <h5 align="center">{{ item }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <br>
+                <ol class="type">
+                    <li><a href="{% url 'home' %}#team" class="active">Назад</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

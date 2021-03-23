@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block  title %}Error!{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/style_error.css' %}">
+</head>
+<body>
+<div class="box">
+    <div>
+        close !
+    </div>
+    {% block  error %}<p><span>Error !</span>Error !</p>{% endblock error %}
+</div>
+<div class="info"><a href="{% url 'home' %}">Вернуться</a></div>
+</body>
+</html>

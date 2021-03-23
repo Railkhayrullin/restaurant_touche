@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ kitchen.name }}{% endblock title %}
+
+{% block content %}
+<!-- Foods Section -->
+    <div id="food">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>{{ kitchen.name }}</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="food-img"><img src="{{ kitchen.image.url }}" class="img-responsive" alt=""></div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="food-text">
+                        <h4 align="center">Описание</h4>
+                        <p>{{ kitchen.description }}</p>
+                    </div>
+                    <div class="text-center">
+                        <br>
+                        <ol class="type">
+                            <li><a href="{% url 'home' %}#restaurant-menu" class="active">вернуться в МЕНЮ</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
