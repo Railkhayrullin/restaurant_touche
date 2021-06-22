@@ -1,10 +1,10 @@
 from django import forms
-from .models import Reviews
+from .models import Review
 
 
 class ReviewsForm(forms.ModelForm):
     class Meta:
-        model = Reviews
+        model = Review
         fields = ['name', 'email', 'message']
         widgets = {
             'name': forms.TextInput(attrs={'type': 'text', 'id': 'name', 'class': 'form-control',

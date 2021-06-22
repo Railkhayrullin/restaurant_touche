@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, ContactInfo, Kitchen, Reviews, Foods, Chefs, RestaurantImage
+from .models import Category, ContactInfo, Kitchen, Review, Food, Chef, RestaurantImage
 
 
 @admin.register(Category)
@@ -44,7 +44,7 @@ class KitchenAdmin(admin.ModelAdmin):
     prepopulated_fields = {"url": ("name",)}
 
 
-@admin.register(Reviews)
+@admin.register(Review)
 class ReviewsAdmin(admin.ModelAdmin):
     """Отзывы"""
     list_display = ("id", "name", "email", "draft")
@@ -52,7 +52,7 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_editable = ("draft",)
 
 
-@admin.register(Foods)
+@admin.register(Food)
 class FoodsAdmin(admin.ModelAdmin):
     """Блюда в меню"""
     list_display = ("id", "name", "category", "kitchen", "price", "in_menu")
@@ -106,7 +106,7 @@ class FoodsAdmin(admin.ModelAdmin):
     get_image.short_description = "Фото блюда"
 
 
-@admin.register(Chefs)
+@admin.register(Chef)
 class ChefsAdmin(admin.ModelAdmin):
     """Отзывы"""
     list_display = ("id", "name", "age", "get_image")

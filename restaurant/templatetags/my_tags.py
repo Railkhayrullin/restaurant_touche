@@ -1,5 +1,5 @@
 from django import template
-from restaurant.models import Category, Chefs, Reviews, ContactInfo, RestaurantImage
+from restaurant.models import Category, Chef, Review, ContactInfo, RestaurantImage
 
 register = template.Library()
 
@@ -11,12 +11,12 @@ def get_category():
 
 @register.simple_tag()
 def get_chefs():
-    return Chefs.objects.all()
+    return Chef.objects.all()
 
 
 @register.simple_tag()
 def get_reviews(count=5):
-    return Reviews.objects.filter(draft=False).order_by('-pk')[:count]
+    return Review.objects.filter(draft=False).order_by('-pk')[:count]
 
 
 @register.simple_tag()
