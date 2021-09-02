@@ -1,16 +1,25 @@
 <nav id="menu" class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-        <a class="navbar-brand page-scroll" href="{% url 'home' %}#page-top">Touche</a> </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'home' %}#about" class="page-scroll">О нас</a></li>
-        <li><a href="{% url 'home' %}#restaurant-menu" class="page-scroll">Меню</a></li>
-        <li><a href="{% url 'home' %}#portfolio" class="page-scroll">Галерея</a></li>
-        <li><a href="{% url 'home' %}#team" class="page-scroll">Шеф-повара</a></li>
-        <li><a href="{% url 'home' %}#reviews" class="page-scroll">Отзывы</a></li>
-        <li><a href="{% url 'home' %}#footer" class="page-scroll">Контактные данные</a></li>
-      </ul>
-    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand page-scroll" href="{% url 'home' %}#page-top">Touche</a></div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'home' %}#about" class="page-scroll">О нас</a></li>
+                <li><a href="{% url 'home' %}#restaurant-menu" class="page-scroll">Меню</a></li>
+                <li><a href="{% url 'home' %}#portfolio" class="page-scroll">Галерея</a></li>
+                <li><a href="{% url 'home' %}#team" class="page-scroll">Шеф-повара</a></li>
+                <li><a href="{% url 'home' %}#reviews" class="page-scroll">Отзывы</a></li>
+                <li><a href="{% url 'home' %}#footer" class="page-scroll">Контактные данные</a></li>
+                {% if cart_count %}
+                    <li>
+                        <a href="{% url 'cart' %}" class="page-scroll">
+                            <i class="fa fa-lg fa-shopping-cart" aria-hidden="true">
+                                <span id="nav-cart-count">{{ cart_count }}</span>
+                            </i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>

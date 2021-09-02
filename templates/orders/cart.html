@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Корзина{% endblock title %}
+
+{% block content %}
+    <!-- Foods Section -->
+    <div id="food">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Ваша корзина {% if not order.order_carts.count %}пуста!{% endif %}</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 ">
+                    <div class="cart-table">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Изображение</th>
+                                <th scope="col">Блюдо</th>
+                                <th scope="col">Цена</th>
+                                <th scope="col">Количество</th>
+                                <th scope="col">Общая сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in order.order_carts.all %}
+                                <tr>
+                                    <td class="w-15">
+                                        <img src="{{ item.food.image.url }}"
+                                             class="img-fluid" alt="Изображение блюда"
+                                             height="150px" width="auto">
+                                    </td>
+                                    <th scope="row">{{ item.food.name }}</th>
+                                    <td>{{ item.food.price }} руб.</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.get_total_price }} руб.</td>
+                                </tr>
+                            {% endfor %}
+                                <tr>
+                                    <td></td>
+                                    <th scope="row"></th>
+                                    <td></td>
+                                    <td><strong>Итого:</strong></td>
+                                    <td><strong>{{ order.get_total }} руб.</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <br>
+                <ol class="type">
+                    <li><a href="{% url 'home' %}#restaurant-menu" class="active">вернуться в МЕНЮ</a></li>
+                    <li><a href="{% url 'home' %}#restaurant-menu" class="active">Оформить заказ</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

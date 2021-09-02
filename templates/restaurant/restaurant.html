@@ -12,142 +12,103 @@
                         <div class="intro-text">
                             <h1>Touche</h1>
                             <p>Р Е С Т О Р А Н</p>
-                            <a href="#about" class="btn btn-custom btn-lg page-scroll">Откройте для себя историю</a></div>
+                            <a href="#about" class="btn btn-custom btn-lg page-scroll">Откройте для себя историю</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-<!-- О ресторане -->
-<div id="about">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-6 ">
+    <!-- О ресторане -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
 
-      <div id="carousel" class="carousel slide" data-ride="carousel" style="display: inline-block;">
-        <!-- Индикаторы -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel" data-slide-to="1"></li>
-            <li data-target="#carousel" data-slide-to="2"></li>
-            <li data-target="#carousel" data-slide-to="3"></li>
-            <li data-target="#carousel" data-slide-to="4"></li>
-        </ol>
-        <div class="carousel-inner">
-            {% get_restaurant_image as images %}
-            {% for image in images %}
-            <div class="item{% if forloop.first %} active{% endif %}">
-                <img src="{{ image.image.url }}" alt="...">
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Элементы управления -->
-        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Предыдущий</span>
-        </a>
-        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Следующий</span>
-        </a>
-    </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="about-text">
-          <h2>ресторан «Touche»</h2>
-          <hr>
-          <p>Качество сервиса в Touche не уступает красоте его интерьера. Официанты ведут себя вежливо и учтиво по
-              отношению к посетителям, а меню представлены как едой местной национальной кухни, так и зарубежной.
-              Мы всегда рады гостям!
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Меню ресторана -->
-<div id="restaurant-menu">
-    <div class="section-title text-center center">
-        <div class="overlay">
-            <h2>Меню</h2>
-            <hr>
-            <p>Все самое лучшее для наших гостей.</p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            {% regroup foods_list by category as food_category %}
-            {% for category in food_category %}
-                <div class="col-xs-12 col-sm-6">
-                    <div class="menu-section">
-                        <h2 class="menu-section-title">{{ category.grouper }}</h2>
-                        <hr>
-                        <div class="menu-item">
-                            {% for food in category.list %}
-                                <div class="menu-item-name">
-                                    <a href="{{ food.get_absolute_url }}">{{ food.name }}</a>
+                    <div id="carousel" class="carousel slide" data-ride="carousel" style="display: inline-block;">
+                        <!-- Индикаторы -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel" data-slide-to="1"></li>
+                            <li data-target="#carousel" data-slide-to="2"></li>
+                            <li data-target="#carousel" data-slide-to="3"></li>
+                            <li data-target="#carousel" data-slide-to="4"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            {% get_restaurant_image as images %}
+                            {% for image in images %}
+                                <div class="item{% if forloop.first %} active{% endif %}">
+                                    <img src="{{ image.image.url }}" alt="...">
                                 </div>
-                                <div class="menu-item-price"> {{ food.price }} </div>
-
-                                <div class="menu-item-description">
-                                    {% if '/-/' not in food.kitchen.get_absolute_url %}
-                                        <a href="{{ food.kitchen.get_absolute_url }}">{{ food.kitchen }}</a>
-                                    {% else %}
-                                        &nbsp;
-                                    {% endif %}
-                                </div>
-
                             {% endfor %}
                         </div>
+
+                        <!-- Элементы управления -->
+                        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Предыдущий</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Следующий</span>
+                        </a>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-<!-- Галерея с блюдами -->
-<div id="portfolio">
-    <div class="section-title text-center center">
-        <div class="overlay">
-            <h2>Галерея</h2>
-            <hr>
-            <p>Искусство кулинарии — древнейшее из искусств.</p>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="categories">
-                <ul class="cat">
-                    <li>
-                        <ol class="type">
-                            <li><a href="#" data-filter="*" class="active">Все</a></li>
-                            {% get_category as categories %}
-                            {% for category in categories %}
-                                <li><a href="#" data-filter=".{{ category.pk }}">{{ category.name }}</a></li>
-                            {% endfor %}
-                        </ol>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="about-text">
+                        <h2>ресторан «Touche»</h2>
+                        <hr>
+                        <p>Качество сервиса в Touche не уступает красоте его интерьера. Официанты ведут себя вежливо и
+                            учтиво по
+                            отношению к посетителям, а меню представлены как едой местной национальной кухни, так и
+                            зарубежной.
+                            Мы всегда рады гостям!
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="portfolio-items">
-                {% for food in foods_list %}
-                    <div class="col-sm-6 col-md-4 col-lg-4 {{ food.category.pk }}">
-                        <div class="portfolio-item">
-                            <div class="hover-bg"><a href="{{ food.image.url }}" title="{{ food.name }}"
-                                                     data-lightbox-gallery="gallery1">
-                                <div class="hover-text">
-                                    <h4><strong><u>{{ food.name }}</u></strong></h4>
-                                    <h6>{{ food.kitchen }}</h6>
-                                </div>
-                                <img src="{{ food.image.url }}" class="img-responsive" alt="Project Title"
-                                     width="389" height="270"> </a>
+    </div>
+
+    <!-- Меню ресторана -->
+    <div id="restaurant-menu">
+        <div class="section-title text-center center">
+            <div class="overlay">
+                <h2>Меню</h2>
+                <hr>
+                <p>Все самое лучшее для наших гостей.</p>
+            </div>
+        </div>
+        <div class="container" id="food-menu">
+            <div class="row">
+                {% regroup foods_list by category as food_category %}
+                {% for category in food_category %}
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="menu-section">
+                            <h2 class="menu-section-title">{{ category.grouper }}</h2>
+                            <hr>
+                            <div class="menu-item" id="menu-item">
+                                {% for food in category.list %}
+                                    <div class="menu-item-name">
+                                        <a href="{{ food.get_absolute_url }}">{{ food.name }}</a>
+                                    </div>
+                                    <div class="menu-item-price">
+                                        <a class="add-to-cart" title="Добавить в корзину">
+                                            <i class="fa fa-plus" aria-hidden="true"
+                                               onclick="addToCart('{% url 'add_to_cart' slug=food.url %}')">
+                                            </i>
+                                        </a>
+                                        {{ food.price }} руб.
+                                    </div>
+                                    <div class="menu-item-description">
+                                        {% if '/-/' not in food.kitchen.get_absolute_url %}
+                                            <a href="{{ food.kitchen.get_absolute_url }}">{{ food.kitchen }}</a>
+                                        {% else %}
+                                            &nbsp;
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -155,101 +116,154 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Шеф-повара -->
-<div id="team" class="text-center">
-    <div class="overlay">
+    <!-- Галерея с блюдами -->
+    <div id="portfolio">
+        <div class="section-title text-center center">
+            <div class="overlay">
+                <h2>Галерея</h2>
+                <hr>
+                <p>Искусство кулинарии — древнейшее из искусств.</p>
+            </div>
+        </div>
         <div class="container">
-            <div class="col-md-10 col-md-offset-1 section-title">
-                <h2>Познакомьтесь с нашими шеф-поварами</h2>
+            <div class="row">
+                <div class="categories">
+                    <ul class="cat">
+                        <li>
+                            <ol class="type">
+                                <li><a href="#" data-filter="*" class="active">Все</a></li>
+                                {% get_category as categories %}
+                                {% for category in categories %}
+                                    <li><a href="#" data-filter=".{{ category.pk }}">{{ category.name }}</a></li>
+                                {% endfor %}
+                            </ol>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="portfolio-items">
+                    {% for food in foods_list %}
+                        <div class="col-sm-6 col-md-4 col-lg-4 {{ food.category.pk }}">
+                            <div class="portfolio-item">
+                                <div class="hover-bg"><a href="{{ food.image.url }}" title="{{ food.name }}"
+                                                         data-lightbox-gallery="gallery1">
+                                    <div class="hover-text">
+                                        <h4><strong><u>{{ food.name }}</u></strong></h4>
+                                        <h6>{{ food.kitchen }}</h6>
+                                    </div>
+                                    <img src="{{ food.image.url }}" class="img-responsive" alt="Project Title"
+                                         width="389" height="270"> </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шеф-повара -->
+    <div id="team" class="text-center">
+        <div class="overlay">
+            <div class="container">
+                <div class="col-md-10 col-md-offset-1 section-title">
+                    <h2>Познакомьтесь с нашими шеф-поварами</h2>
+                    <hr>
+                </div>
+                <div id="row">
+                    {% get_chefs as chefs %}
+                    {% for chef in chefs %}
+                        <div class="col-md-4 team">
+                            <div class="thumbnail">
+                                <div class="team-img"><img src="{{ chef.image.url }}" alt="..." width="270"
+                                                           height="389"></div>
+                                <div class="caption">
+                                    <h3><a href="{{ chef.get_absolute_url }}">{{ chef.name }}</a></h3>
+                                    <p>{{ chef.description|truncatechars:120 }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Отзывы -->
+    <div id="reviews">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Отзывы</h2>
                 <hr>
             </div>
-            <div id="row">
-                {% get_chefs as chefs %}
-                {% for chef in chefs %}
-                    <div class="col-md-4 team">
-                        <div class="thumbnail">
-                            <div class="team-img"><img src="{{ chef.image.url }}" alt="..." width="270"
-                                                       height="389"></div>
-                            <div class="caption">
-                                <h3><a href="{{ chef.get_absolute_url }}">{{ chef.name }}</a></h3>
-                                <p>{{ chef.description|truncatechars:120 }}</p>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 ">
+                    <div class="reviews-img"><img src="{% static 'img/wp-hotel.jpg' %}" class="img-responsive" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6" id="testimonials-row">
+                    <h2 class="page-header text-center"><small>Наши клиенты любят нас!</small></h2>
+                    <div class="carousel slide" id="testimonials-rotate" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% get_reviews as reviews %}
+                            {% for review in reviews %}
+                                <div class="item{% if forloop.first %} active{% endif %}">
+                                    <div class="col-md-2"><img alt="" src="{% static '/img/user-logo.png' %}"
+                                                               class="img-circle img-responsive"/>
+                                    </div>
+                                    <div class="testimonials col-md-10">
+                                        <h3>{{ review.message }}</h3>
+                                        <p align="right">{{ review.name }}</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <a class="left" href="#testimonials-rotate" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span></a>
+                        <a class="right" href="#testimonials-rotate" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Добавление отзывов -->
+        <div class="container text-center">
+            <h2 class="page-header text-center"><small>Добавьте свой отзыв</small></h2>
+            <div class="col-md-10 col-md-offset-1">
+                <form action="{% url 'home' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="form-group">
+                                {{ form.as_p }}
+                                <p class="help-block text-danger"></p>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Отзывы -->
-<div id="reviews">
-    <div class="container">
-        <div class="section-title text-center">
-            <h2>Отзывы</h2>
-            <hr>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-6 ">
-                <div class="reviews-img"><img src="{% static 'img/wp-hotel.jpg' %}" class="img-responsive" alt="">
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6" id="testimonials-row">
-                <h2 class="page-header text-center"><small>Наши клиенты любят нас!</small></h2>
-                <div class="carousel slide" id="testimonials-rotate" data-ride="carousel">
-                    <div class="carousel-inner">
-                        {% get_reviews as reviews %}
-                        {% for review in reviews %}
-                            <div class="item{% if forloop.first %} active{% endif %}">
-                                <div class="col-md-2"><img alt="" src="{% static '/img/user-logo.png' %}"
-                                                           class="img-circle img-responsive"/>
-                                </div>
-                                <div class="testimonials col-md-10">
-                                    <h3>{{ review.message }}</h3>
-                                    <p align="right">{{ review.name }}</p>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="pull-right">
-                    <a class="left" href="#testimonials-rotate" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span></a>
-                    <a class="right" href="#testimonials-rotate" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span></a>
-                </div>
+                    <div id="success"></div>
+                    <button type="submit" class="btn btn-lg">Отправить сообщение</button>
+                </form>
             </div>
         </div>
     </div>
 
-<!-- Добавление отзывов -->
-    <div class="container text-center">
-        <h2 class="page-header text-center"><small>Добавьте свой отзыв</small></h2>
-        <div class="col-md-10 col-md-offset-1">
-            <form action="{% url 'home' %}" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="form-group">
-                            {{ form.as_p }}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                </div>
-                <div id="success"></div>
-                <button type="submit" class="btn btn-lg">Отправить сообщение</button>
-            </form>
+    <!-- Номер для резервирования столика -->
+    <div id="call-reservation" class="text-center">
+        <div class="container">
+            <h2>Хотите заказать столик? Звоните <strong>1-887-654-3210</strong></h2>
         </div>
     </div>
-</div>
 
-<!-- Номер для резервирования столика -->
-<div id="call-reservation" class="text-center">
-    <div class="container">
-        <h2>Хотите заказать столик? Звоните <strong>1-887-654-3210</strong></h2>
-    </div>
-</div>
+    <!-- Всплывающее сообщение -->
+    <div class="message-box"></div>
+
+
+
 {% endblock content %}
