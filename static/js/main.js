@@ -107,3 +107,15 @@ function addToCart(url) {
     fetch(url).then(r => r.json()).then(r => showCountCart(r.count));
     showMessage(textOk);
 }
+
+const orderCreateButton = document.getElementById("order-form-button");
+
+orderCreateButton.addEventListener("click", function (event) {
+    const phone = document.getElementById("phone-number");
+    const regex = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    if (!regex.test(phone.value)) {
+    phone.setCustomValidity("Пожалуйста, введите номер телефона.");
+  } else {
+    phone.setCustomValidity("");
+  }
+});

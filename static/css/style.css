@@ -924,3 +924,47 @@ label {
     position: fixed;
     text-align: center;
 }
+
+.page-center {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/*ORDER PAGES*/
+#order-create .order-form label {
+    display: none;
+}
+#order-create .td-align-right {
+    text-align: right;
+}
+
+.order-form-button {
+    text-decoration: none;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #8eb640;
+}
+
+.order-form-button:hover {
+    color: black;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.add-margin-top {
+    margin-top: 100px;
+}

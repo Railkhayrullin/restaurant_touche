@@ -1,8 +1,8 @@
 from django.views.generic import DetailView, CreateView
 
+from orders.cart import Cart
 from .models import Food, Kitchen, Chef
 from .forms import ReviewsForm
-from orders.service import get_current_order
 
 
 class ReviewCreateAndFoodView(CreateView):
@@ -16,10 +16,6 @@ class ReviewCreateAndFoodView(CreateView):
         kwargs['foods_list'] = Food.objects.filter(in_menu=True)\
                                    .order_by('category')\
                                    .select_related('category', 'kitchen')
-        order = get_current_order(self.request)
-        kwargs['cart_count'] = order.order_carts.count()
-        if not kwargs['cart_count']:
-            kwargs['cart_count'] = '0'
         return super(ReviewCreateAndFoodView, self).get_context_data(**kwargs)
 
 
