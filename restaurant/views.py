@@ -1,10 +1,11 @@
 from django.views.generic import DetailView, CreateView
 
+from orders.cart import Cart
 from .models import Food, Kitchen, Chef
 from .forms import ReviewsForm
 
 
-class FoodCreateView(CreateView):
+class ReviewCreateAndFoodView(CreateView):
     """Создание отзыва"""
     form_class = ReviewsForm
     template_name = "restaurant/restaurant.html"
@@ -15,8 +16,7 @@ class FoodCreateView(CreateView):
         kwargs['foods_list'] = Food.objects.filter(in_menu=True)\
                                    .order_by('category')\
                                    .select_related('category', 'kitchen')
-
-        return super(FoodCreateView, self).get_context_data(**kwargs)
+        return super(ReviewCreateAndFoodView, self).get_context_data(**kwargs)
 
 
 class FoodDetailView(DetailView):
