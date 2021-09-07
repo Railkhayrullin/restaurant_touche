@@ -1,16 +1,20 @@
-from django.contrib.sessions.models import Session
+from django.conf import settings
+from django.contrib.auth.models import User
+from restaurant_touche import settings as site_settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
-from orders.models import Order
 
+def send_messages_to_managers(order):
+    if User.objects.filter(groups__name='managers'):
+        managers = User.objects.filter(groups__name='managers')
+        emails = [manager.email for manager in managers]
 
-def get_current_order(request):
-    if Order.objects.filter(session__session_key=request.session.session_key, status="new"):
-        return Order.objects.filter(session__session_key=request.session.session_key, status="new").first()
+        html = render_to_string('email/new_order_email.html', {'order': order})
+        if not settings.DEBUG:
+            send_mail(f'Новый заказ на сайте {site_settings.SITE_URL}', html, settings.DEFAULT_FROM_EMAIL,
+                      emails, html_message=html)
+        else:
+            print(html)
     else:
-        order = Order()
-        if not request.session.session_key:
-            request.session.save()
-        session = Session.objects.get(session_key=request.session.session_key)
-        order.session = session
-        order.save()
-        return order
+        print('Менеджеры не найдены!')

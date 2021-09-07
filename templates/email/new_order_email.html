@@ -1,0 +1,13 @@
+Клиент: {{ order.first_name }} {{ order.last_name }}<br>
+Телефон: {{ order.phone }}<br>
+Почта: {{ order.email }}<br>
+Адрес: {{ order.address }}<br>
+Тип доставки: {{ order.buying_type }}<br>
+Комментарий к заказу: {{ order.comment }}<br>
+Сумма заказа: {{ order.get_total_cost }} руб.<br>
+Содержимое заказа:
+{% for detail in order.order_carts.all %}
+Блюдо: {{ detail.food.name }}
+Количество: {{ detail.quantity }}
+Цена: {{ detail.price }} руб.
+{% endfor %}

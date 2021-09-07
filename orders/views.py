@@ -4,6 +4,7 @@ from restaurant.models import Food
 from .models import CartFood
 from .cart import Cart
 from .forms import OrderCreateForm
+from .service import send_messages_to_managers
 
 
 def add_to_cart(request, slug):
@@ -49,6 +50,9 @@ def order_create(request):
 
             # создание объектов БД одним запросом
             CartFood.objects.bulk_create(obj_list)
+
+            # отправка писем о новом заказе менеджерам
+            send_messages_to_managers(order)
 
             # очистка корзины
             cart.clear()

@@ -1,6 +1,5 @@
 from django.views.generic import DetailView, CreateView
 
-from orders.cart import Cart
 from .models import Food, Kitchen, Chef
 from .forms import ReviewsForm
 
