@@ -149,3 +149,17 @@ MESSAGE_TAGS = {
  }
 
 CART_SESSION_ID = 'cart'
+
+# доменное имя сайта
+SITE_URL = 'www.my_restaurant.com'
+
+"""Параметры для настройка почты"""
+EMAIL_HOST_DOMAIN = 'http://localhost:8000'
+EMAIL_HOST = 'smtp.mail.ru'  # host
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'ddjango@internet.ru'  # email
+EMAIL_HOST_PASSWORD = os.environ.get('emailhostpassword')  # password
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
