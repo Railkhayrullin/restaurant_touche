@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Заказ создан{% endblock title %}
+
+{% block content %}
+    <!-- Foods Section -->
+    <div id="food">
+        <div class="container add-margin-top">
+            <div class="section-title text-center">
+                <h2 class="add-margin-top">Спасибо Вам.</h2>
+                <hr>
+            </div>
+            <div class="row ">
+                <div class="col-12 align-center">
+                    <h4>Ваш <strong>заказ №{{ order.id }}</strong> успешно оформлен.</h4>
+                </div>
+            </div>
+            <div class="text-center add-margin-top">
+                <br>
+                <ol class="type">
+                    <li class="add-margin-top"><a href="{% url 'home' %}" class="active">Вернуться к МЕНЮ</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

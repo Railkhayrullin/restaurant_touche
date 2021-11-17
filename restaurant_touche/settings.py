@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '*6g#$$waw-tz#c4wj^14z986wp3*y(5$gw31d0e5-kiuttb2)6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'debug_toolbar',
-    'restaurant.apps.RestaurantConfig',
+
+    'apps.restaurant.apps.RestaurantConfig',
+    'apps.api.apps.ApiConfig',
+    'apps.orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.orders.context_processors.count_cart',
             ],
         },
     },
@@ -121,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = BASE_DIR / 'static'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
@@ -134,3 +140,28 @@ DEBUG_TOOLBAR_CONFIG = {
     'RESULTS_CACHE_SIZE': 100,
     'SQL_WARNING_THRESHOLD': 2000
 }
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
+
+CART_SESSION_ID = 'cart'
+
+# доменное имя сайта
+SITE_URL = 'www.my_restaurant.com'
+
+"""Параметры для настройка почты"""
+EMAIL_HOST_DOMAIN = 'http://localhost:8000'
+EMAIL_HOST = 'smtp.mail.ru'  # host
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'ddjango@internet.ru'  # email
+EMAIL_HOST_PASSWORD = os.environ.get('emailhostpassword')  # password
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
